@@ -31,16 +31,26 @@
 		<div id="menu" class="hidden-menu">
             <!-- Liste de liens -->
             <nav class="main-navigation">
-        <?php wp_nav_menu([
-            "menu_class" => "main-navigation__list",
-        ]); ?>
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'primary-menu',
+					'menu_id' => 'primary-menu',
+				)
+			);
+			?>
 		
     </nav>
         </div>
     <nav class="main-navigation">
-        <?php wp_nav_menu([
-            "menu_class" => "main-navigation__list",
-        ]); ?>
+        <?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'primary-menu',
+					'menu_id' => 'primary-menu',
+				)
+			);
+			?>
     </nav><!-- .site-header__main-navigation -->
 </header><!-- .site-header -->
 

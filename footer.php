@@ -8,10 +8,18 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
-        <ul>
-            
-        </ul>
+	<footer class="site-footer">
+
+        <?php
+wp_nav_menu(array(
+    'theme_location' => 'footer_menu', // Utilisez le nom de l'emplacement du menu que vous avez défini dans functions.php
+    'menu_id'        => 'footer-menu',
+    'container'      => 'nav',
+    'container_class'=> 'site-footer__menu', // Ajoutez des classes supplémentaires au conteneur si nécessaire
+));
+?>
+
+
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 

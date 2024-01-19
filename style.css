@@ -4,7 +4,7 @@ Theme Name: Moto Photo
 Theme URI: http://nmotophoto.com
 Author: Admin
 Description: Thème WordPress conçu pour une photographe freelance.
-Version: 1.1.0
+Version: 1.2.0
 */
 .site-header {
   position: sticky;
@@ -15,6 +15,7 @@ Version: 1.1.0
   justify-content: space-between;
   height: 80px;
   padding: 0 10%;
+  box-shadow: 0px 4px 14px 10px rgba(0, 0, 0, 0.03);
   /*inclus la mixin de debug*/
 }
 .site-header__logo {
@@ -56,6 +57,9 @@ Version: 1.1.0
   text-transform: uppercase;
   position: relative;
   text-decoration: none;
+}
+.site-header .main-navigation a:hover {
+  font-weight: 700;
 }
 .site-header .main-navigation a::before {
   content: "";
@@ -118,6 +122,9 @@ Version: 1.1.0
   text-transform: uppercase;
   position: relative;
   text-decoration: none;
+}
+#menu .main-navigation a:hover {
+  font-weight: 700;
 }
 #menu .main-navigation a::before {
   content: "";
@@ -203,6 +210,55 @@ body {
 button {
   all: unset;
   cursor: pointer;
+}
+
+footer {
+  min-height: 80px;
+  border-top: 1px solid black;
+  padding: 1px 0px 8px 0px;
+}
+footer ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 86px;
+}
+@media screen and (max-width: 668px) {
+  footer ul {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+footer a {
+  color: #000000;
+  font-family: "Space Mono";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+  position: relative;
+  text-decoration: none;
+}
+footer a:hover {
+  font-weight: 700;
+}
+footer a::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  border-radius: 0px;
+  background-color: #e00000;
+  bottom: 0;
+  left: 0;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+footer a:hover::before {
+  transform-origin: left;
+  transform: scaleX(1);
 }
 
 /*# sourceMappingURL=style.css.map */

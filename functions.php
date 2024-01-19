@@ -2,7 +2,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.1.0' );
+	define( '_S_VERSION', '1.2.0' );
 }
 
 function theme_enqueue_styles() {
@@ -28,3 +28,9 @@ function theme_register_menus() {
     );
 }
 add_action( 'after_setup_theme', 'theme_register_menus' );
+
+function register_footer_menu() {
+    register_nav_menu('footer_menu', __('Footer Menu', 'textdomain'));
+}
+add_action('after_setup_theme', 'register_footer_menu');
+
