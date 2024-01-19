@@ -1,0 +1,34 @@
+@mixin debug {
+    border: 1px solid red;
+}
+
+@mixin link-styles($colorUnderline, $color, $fontSize, $textTransform, $height) {
+    color: $color;
+    font-family: "Space Mono";
+    font-size: $fontSize;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: $textTransform;
+    position: relative;
+    text-decoration: none;
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: $height;
+        border-radius: 0px; // 4px
+        background-color: $colorUnderline;
+        bottom: 0;
+        left: 0;
+        transform-origin: right;
+        transform: scaleX(0);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    &:hover::before {
+        transform-origin: left;
+        transform: scaleX(1);
+    }
+}
