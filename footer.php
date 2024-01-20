@@ -7,6 +7,7 @@
  */
 
 ?>
+<?php get_template_part("template-parts/modal"); ?>
 
 	<footer class="site-footer">
 

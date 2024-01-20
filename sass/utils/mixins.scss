@@ -36,3 +36,41 @@
         transform: scaleX(1);
     }
 }
+
+/* -------------------------------------------------------------------------- */
+/*                            Mixins pour le Modal                            */
+/* -------------------------------------------------------------------------- */
+
+$primary-color: #000;
+$secondary-color: #313144;
+$error-color: red;
+$light-gray-color: #d8d8d8;
+$dark-gray-color: #b8bbc2;
+$max-width: 668px;
+$max-width-mobile: 468px;
+
+$poppins-font: "Poppins", sans-serif;
+$space-mono-font: "Space Mono";
+
+$base-font-size: 0.75rem;
+$base-line-height: normal;
+$base-padding-bottom: 3px;
+
+$border-radius: 8px;
+
+@mixin flex-center() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin mobile-modifications() {
+    @media screen and (max-width: $max-width) {
+        @content;
+    }
+}
+@mixin mobile-modifications-mobile() {
+    @media screen and (max-width: $max-width-mobile) {
+        @content;
+    }
+}

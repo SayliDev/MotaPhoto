@@ -3,10 +3,12 @@ Theme Name: Moto Photo
 Theme URI: http://nmotophoto.com
 Author: Admin
 Description: Thème WordPress conçu pour une photographe freelance.
-Version: 1.2.0
+Version: 1.3.0
 */
 
 // Importez les modules
 @import "modules/header";
 
 @import "modules/footer.scss";
+
+@import "modules/modal.scss";
