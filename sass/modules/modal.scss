@@ -90,7 +90,7 @@
             }
 
             &:hover {
-                background: rgb(184, 186, 190);
+                background: #000;
             }
 
             &[value="Envoyer"] {
@@ -100,6 +100,10 @@
                 font-style: normal;
                 font-weight: 400;
                 line-height: $base-line-height;
+            }
+
+            &[value="Envoyer"]:hover {
+                color: #fff;
             }
         }
 
