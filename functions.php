@@ -2,7 +2,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.3.1' );
+	define( '_S_VERSION', '1.3.2' );
 }
 
 function theme_enqueue_styles() {
@@ -11,13 +11,15 @@ function theme_enqueue_styles() {
 wp_enqueue_style('space-mono-font', 'https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap', array(), null);
 
 // Enqueue Poppins font
-wp_enqueue_style('poppins-font', 'https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap', array(), null);
+wp_enqueue_style('poppins-font', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap', array(), null);
 
     // Enqueue main stylesheet
     wp_enqueue_style('main-style', get_template_directory_uri() . '/style.css', array(), '1.0', 'all');
     // Enqueue navigation script
     wp_enqueue_script('navigation-script', get_stylesheet_directory_uri() . '/js/navigation.js', array(), null, true);
     wp_enqueue_script('global-script', get_stylesheet_directory_uri() . '/js/scripts.js', array(), null, true);
+    // Enqueue jQuery
+    wp_enqueue_script( 'jquery' );
 
     // Other optional stylesheets or scripts
     // wp_enqueue_style('another-style', get_template_directory_uri() . '/path/to/another-style.css', array(), '1.0', 'all');

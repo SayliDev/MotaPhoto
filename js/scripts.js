@@ -1,6 +1,6 @@
 const modal = document.getElementById("contactModal");
 const overlay = document.getElementById("menu-overlay");
-const menuItems = document.querySelectorAll(".menu-item-29 a");
+const menuItems = document.querySelectorAll(".menu-item-29 a, .contact-btn");
 
 // Fonction pour ouvrir le menu
 function openMenu() {
@@ -37,3 +37,7 @@ document.body.addEventListener("click", (event) => {
 overlay.addEventListener("click", () => {
   closeMenu();
 });
+
+// jQuery(document).ready(function () {
+//   jQuery("#email").val("my-email@waytolearnx.com");
+// });
