@@ -84,19 +84,45 @@ while (have_posts()):
         </div>
 
 
-        <!-- photo suivante & precedente -->
         <div class="photo-contact__nav">
-            <!-- affiche un apercu de la photo suivante -->
+        <?php
+$current_post_id = get_the_ID();
+$args = array(
+    'posts_per_page' => -1,
+    'post_type' => 'photos', 
+    'post_status' => 'publish',
+    'order' => 'ASC', // triés par ordre croissant
+);
 
-        <button class="prev-btn">
+$all_posts = get_posts($args);
+$current_post_index = array_search($current_post_id, array_column($all_posts, 'ID'));
+
+$prev_post = $all_posts[$current_post_index - 1] ?? $all_posts[count($all_posts) - 1]; // on affiche le dernier si on est au premier
+$next_post = $all_posts[$current_post_index + 1 ] ?? $all_posts[0]; // on affiche le premier si on est au dernier
+
+// si arrive au dernier article, on affiche le premier
+if ($current_post_index === count($all_posts) - 1) {
+    $prev_post = $all_posts[0];
+}
+
+if ($prev_post || $next_post) :
+?>
+    <a href="<?php echo esc_url(get_permalink($prev_post)); ?>" class="prev-btn">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/prev.svg">
-        </button>
-        <button class="next-btn"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/next.svg"></button>
+    </a>
+    <a href="<?php echo esc_url(get_permalink($next_post)); ?>" class="next-btn">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/next.svg">
+    </a>
 
-        
+    <div> 
+        <!-- Affiche l'image de l'article suivant -->
+        <?php if ($next_post) : ?>
+            <img src="<?php echo get_the_post_thumbnail_url($next_post, 'thumbnail'); ?>">
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
 
-        </div>
-       
+
         
     </section>
 </div><!-- #primary -->
