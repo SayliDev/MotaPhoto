@@ -7,8 +7,6 @@
         img {
             width: 100%;
             height: 100%;
-            // aplique un fond noir sur l'image
-            filter: brightness(10%);
         }
     }
 }
@@ -17,7 +15,11 @@
     display: flex;
     align-items: flex-end;
 
-    @include debug();
+    .photo-separator {
+        border-bottom: 1.5px solid black;
+        width: 49rem;
+        padding-top: 22px;
+    }
 
     .photo-description {
         display: flex;
@@ -48,6 +50,8 @@
 .photo-contact {
     display: flex;
     padding: 0 140px;
+    justify-content: space-between;
+    // border-bottom: 1px solid #000;
 
     &__container {
         display: flex;
@@ -55,7 +59,7 @@
         align-items: center;
         height: 118px;
 
-        @include debug();
+        // @include debug();
 
         p {
             color: #000;
@@ -94,8 +98,18 @@
     }
 
     &__nav {
-        @include debug();
+        display: flex;
+        gap: 10px;
+        flex-direction: column-reverse;
+        align-items: end;
 
+        // @include debug();
+    }
+
+    &__nav-container {
+        display: flex;
+        gap: 30px;
+        padding-right: 3px;
         .prev-btn {
             transition: 0.3s;
 
@@ -110,5 +124,51 @@
                 transform: translate(5px, 0);
             }
         }
+    }
+
+    &__images {
+        display: flex;
+        justify-content: end;
+
+        img {
+            width: 30%;
+        }
+
+        .prev-img {
+            // @include debug();
+            opacity: 1;
+        }
+        .next-img {
+            opacity: 0;
+        }
+
+        #prev-img-position {
+            position: relative;
+            left: 30%;
+        }
+    }
+}
+
+.photo-recomandation {
+    padding: 15px 140px;
+
+    .photo-separator {
+        border-bottom: 1px solid #000;
+        width: 100%;
+    }
+    h3 {
+        padding-top: 70px;
+        color: #000;
+        font-family: "Space Mono";
+        font-size: 1.125rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.1125rem;
+        text-transform: uppercase;
+    }
+
+    &__container {
+        display: flex;
     }
 }

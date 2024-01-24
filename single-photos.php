@@ -65,7 +65,9 @@ while (have_posts()):
                 <p>Format : <?php echo $format; ?> </p>
                 <p>Type : <?php echo $type; ?></p>
                 <p>Année : <?php echo get_the_date("Y"); ?> </p>
+                <div class="photo-separator"></div> 
                 </div>
+                
             </div>
 
             <!-- Ajout de la photo -->
@@ -85,13 +87,14 @@ while (have_posts()):
 
 
         <div class="photo-contact__nav">
+            <div class="photo-contact__nav-container">
         <?php
 $current_post_id = get_the_ID();
 $args = array(
     'posts_per_page' => -1,
     'post_type' => 'photos', 
     'post_status' => 'publish',
-    'order' => 'ASC', // triés par ordre croissant
+    'order' => 'ASC', // par ordre croissant
 );
 
 $all_posts = get_posts($args);
@@ -99,11 +102,6 @@ $current_post_index = array_search($current_post_id, array_column($all_posts, 'I
 
 $prev_post = $all_posts[$current_post_index - 1] ?? $all_posts[count($all_posts) - 1]; // on affiche le dernier si on est au premier
 $next_post = $all_posts[$current_post_index + 1 ] ?? $all_posts[0]; // on affiche le premier si on est au dernier
-
-// si arrive au dernier article, on affiche le premier
-if ($current_post_index === count($all_posts) - 1) {
-    $prev_post = $all_posts[0];
-}
 
 if ($prev_post || $next_post) :
 ?>
@@ -113,26 +111,42 @@ if ($prev_post || $next_post) :
     <a href="<?php echo esc_url(get_permalink($next_post)); ?>" class="next-btn">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/next.svg">
     </a>
+    </div>
 
-    <div> 
-        <!-- Affiche l'image de l'article suivant -->
-        <?php if ($next_post) : ?>
-            <img src="<?php echo get_the_post_thumbnail_url($next_post, 'thumbnail'); ?>">
+    <div class="photo-contact__images"> 
+        <!-- affiche l'image de l'article suivant -->
+        <?php if ($prev_post) : ?>
+            <img id="prev-img-position" class="prev-img" src="<?php echo get_the_post_thumbnail_url($prev_post, 'thumbnail'); ?>">
         <?php endif; ?>
+        <?php if ($next_post) : ?>
+            <img class="next-img" src="<?php echo get_the_post_thumbnail_url($next_post, 'thumbnail'); ?>">
+        <?php endif; ?>
+        
     </div>
 <?php endif; ?>
 
 
         
     </section>
+
+    <!-- Recomandation photo de la meme categorie -->
+    <section class="photo-recomandation">
+        <div class="photo-separator"></div>
+            <h3>Vous aimerez aussi</h3>
+
+            <div class="photo-recomandation__container">
+                <?php get_template_part("template-parts/recomandation"); ?>
+            
+            </div>
+        </section>
 </div><!-- #primary -->
 
 <script>
 jQuery(document).ready(function ($) {
-  // Récupérez la référence de la photo depuis PHP
+  // récupére la référence
   let photoReference = "#<?php echo esc_js($reference); ?>";
 
-  // Ajoutez la référence à votre champ dans la modale
+  // ajoutez la référence au champ
   $("#reference").val(photoReference);
 });
 </script>
