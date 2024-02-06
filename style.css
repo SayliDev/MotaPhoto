@@ -4,10 +4,13 @@ Theme Name: Moto Photo
 Theme URI: http://motophoto.com
 Author: Admin
 Description: Thème WordPress conçu pour une photographe freelance.
-Version: 1.4.4
+Version: 1.4.5
 */
 /* -------------------------------------------------------------------------- */
 /*                            Mixins pour le Modal                            */
+/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                          Mixin pour le Signle Page                         */
 /* -------------------------------------------------------------------------- */
 .site-header {
   position: sticky;
@@ -444,6 +447,13 @@ footer a:hover::before {
   grid-template-columns: 50% 50%;
   padding: 10px 140px;
 }
+@media screen and (max-width: 900px) {
+  .site-photo-main {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 10px 56px;
+  }
+}
 .site-photo-main .photo-container img {
   width: 100%;
   height: 100%;
@@ -473,6 +483,11 @@ footer a:hover::before {
   text-transform: uppercase;
   width: 50%;
 }
+@media screen and (max-width: 1088px) and (min-width: 900px) {
+  .photo-details .entry-title {
+    font-size: 3.125rem;
+  }
+}
 .photo-details p {
   color: #000;
   font-family: "Space Mono";
@@ -489,11 +504,24 @@ footer a:hover::before {
   padding: 0 140px;
   justify-content: space-between;
 }
+@media screen and (max-width: 900px) {
+  .photo-contact {
+    padding: 10px 56px;
+    justify-content: center;
+    border: black 1px solid;
+  }
+}
 .photo-contact__container {
   display: flex;
   gap: 96px;
   align-items: center;
   height: 118px;
+}
+@media screen and (max-width: 1190px) {
+  .photo-contact__container {
+    flex-direction: column;
+    gap: 0;
+  }
 }
 .photo-contact__container p {
   color: #000;
@@ -533,6 +561,11 @@ footer a:hover::before {
   flex-direction: column-reverse;
   align-items: end;
 }
+@media screen and (max-width: 900px) {
+  .photo-contact__nav {
+    display: none;
+  }
+}
 .photo-contact__nav-container {
   display: flex;
   gap: 30px;
@@ -568,12 +601,23 @@ footer a:hover::before {
   left: 30%;
 }
 
+.photo-separator {
+  border-bottom: 1px solid #000;
+  width: 100%;
+}
+@media screen and (max-width: 900px) {
+  .photo-separator {
+    display: none;
+  }
+}
+
 .photo-recomandation {
   padding: 15px 140px;
 }
-.photo-recomandation .photo-separator {
-  border-bottom: 1px solid #000;
-  width: 100%;
+@media screen and (max-width: 900px) {
+  .photo-recomandation {
+    padding: 10px 56px;
+  }
 }
 .photo-recomandation h3 {
   padding-top: 70px;
@@ -588,18 +632,65 @@ footer a:hover::before {
   padding-bottom: 53px;
   margin: 0;
 }
+@media screen and (max-width: 900px) {
+  .photo-recomandation h3 {
+    text-align: center;
+  }
+}
 .photo-recomandation__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 50%;
   padding-bottom: 100px;
+  gap: 20px;
+}
+@media screen and (max-width: 900px) {
+  .photo-recomandation__container {
+    flex-direction: column;
+  }
 }
 .photo-recomandation__container .related-photo img {
-  width: 564px;
-  height: 495px;
+  width: 806px;
+  height: 702.5px;
   object-fit: cover;
   object-position: unset;
+}
+@media screen and (max-width: default) {
+  .photo-recomandation__container .related-photo img {
+    width: 806px;
+    height: 702.5px;
+  }
+}
+@media screen and (max-width: 1796px) {
+  .photo-recomandation__container .related-photo img {
+    width: 564px;
+    height: 495px;
+  }
+}
+@media screen and (max-width: 1410px) {
+  .photo-recomandation__container .related-photo img {
+    width: 474px;
+    height: 413.25px;
+  }
+}
+@media screen and (max-width: 1240px) {
+  .photo-recomandation__container .related-photo img {
+    width: 403px;
+    height: 351.25px;
+  }
+}
+@media screen and (max-width: 1070px) {
+  .photo-recomandation__container .related-photo img {
+    width: 349.5px;
+    height: 304.5px;
+  }
+}
+@media screen and (max-width: 940px) {
+  .photo-recomandation__container .related-photo img {
+    width: 317.66px;
+    height: 278.8px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -135,14 +135,14 @@ if ($prev_post || $next_post) :
             <h3>Vous aimerez aussi</h3>
 
             <div class="photo-recomandation__container">
-                <!-- Affiche les photos de la meme categorie de celle affichée actuellement sur la page -->
+                <!-- Affiche  photos de la meme categorie de celle affichée actuellement sur la page -->
                 <?php
-                // Récupére les catégories de la photo actuelle
+                // Récupére  catégories de la photo actuelle
                 $categories = get_the_terms(get_the_ID(), "categorie");
 
-                // Si des catégories existent
+                // Si catégories existent
                 if ($categories && !is_wp_error($categories)) {
-                    // Récupére le premier terme de la première catégorie
+                    // Récupére  premier terme de la première catégorie
                     $current_category = $categories[0]->term_id;
 
                     $args = [
@@ -161,11 +161,11 @@ if ($prev_post || $next_post) :
 
                     $related_photos = get_posts($args);
 
-                    // Affiche les photos recommandées
+                    // Affiche photos recommandées
                     $count = 0; // Variable pour compter le nombre de photos affichées
 
 foreach ($related_photos as $photo) {
-    // Vérifie si l'ID de la photo actuelle n'est pas égal à l'ID de la photo recommandée
+    // Vérifie l'ID de la photo actuelle n'est pas égal à l'ID de la photo recommandée
     if (get_the_ID() !== $photo->ID) {
         echo '<div class="related-photo">';
         echo '<a href="' . esc_url(get_permalink($photo)) . '">';
@@ -175,7 +175,7 @@ foreach ($related_photos as $photo) {
 
         $count++;
 
-        // Si nous avons atteint le nombre maximum de photos à afficher (2), sortir de la boucle
+        // Si atteint le nombre maximum de photos à afficher (2), sortir de la boucle
         if ($count === 2) {
             break;
         }}
