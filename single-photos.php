@@ -135,8 +135,55 @@ if ($prev_post || $next_post) :
             <h3>Vous aimerez aussi</h3>
 
             <div class="photo-recomandation__container">
-                <?php get_template_part("template-parts/recomandation"); ?>
-            
+                <!-- Affiche les photos de la meme categorie de celle affichée actuellement sur la page -->
+                <?php
+                // Récupére les catégories de la photo actuelle
+                $categories = get_the_terms(get_the_ID(), "categorie");
+
+                // Si des catégories existent
+                if ($categories && !is_wp_error($categories)) {
+                    // Récupére le premier terme de la première catégorie
+                    $current_category = $categories[0]->term_id;
+
+                    $args = [
+                        // "posts_per_page" => 2,
+                        "post_type" => "photos",
+                        "post_status" => "publish",
+                        "order" => "ASC",
+                        "tax_query" => [
+                            [
+                                "taxonomy" => "categorie",
+                                "field" => "id",
+                                "terms" => $current_category,
+                            ],
+                        ],
+                    ];
+
+                    $related_photos = get_posts($args);
+
+                    // Affiche les photos recommandées
+                    $count = 0; // Variable pour compter le nombre de photos affichées
+
+foreach ($related_photos as $photo) {
+    // Vérifie si l'ID de la photo actuelle n'est pas égal à l'ID de la photo recommandée
+    if (get_the_ID() !== $photo->ID) {
+        echo '<div class="related-photo">';
+        echo '<a href="' . esc_url(get_permalink($photo)) . '">';
+        echo get_the_post_thumbnail($photo->ID, array( 564, 495)); // moyenne largeur
+        echo "</a>";
+        echo "</div>";
+
+        $count++;
+
+        // Si nous avons atteint le nombre maximum de photos à afficher (2), sortir de la boucle
+        if ($count === 2) {
+            break;
+        }}
+    }
+}
+
+                ?>
+
             </div>
         </section>
 </div><!-- #primary -->
@@ -146,7 +193,7 @@ jQuery(document).ready(function ($) {
   // récupére la référence
   let photoReference = "#<?php echo esc_js($reference); ?>";
 
-  // ajoutez la référence au champ
+  // ajoute la référence au champ
   $("#reference").val(photoReference);
 });
 </script>

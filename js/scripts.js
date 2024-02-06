@@ -45,10 +45,6 @@ const next = document.querySelector(".next-btn");
 
 const prevImage = document.querySelector(".photo-contact__images .prev-img");
 const nextImage = document.querySelector(".photo-contact__images .next-img");
-// console.log(nextImage);
-// console.log(prevImage);
-// console.log(next);
-// console.log(prev);
 
 prev.addEventListener("mouseover", (event) => {
   prevImage.classList.remove("prev-img");
