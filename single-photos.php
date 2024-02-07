@@ -9,7 +9,7 @@ get_header(); ?>
 <div id="primary" class="content-area">
     <main id="main" class="site-photo-main">
 
-	<?php // Boucle WordPress standard pour afficher le contenu du CPT "photo"
+	<?php // Boucle pour afficher le contenu du CPT "photo"
 
 while (have_posts()):
 
@@ -164,22 +164,24 @@ if ($prev_post || $next_post) :
                     // Affiche photos recommandées
                     $count = 0; // Variable pour compter le nombre de photos affichées
 
-foreach ($related_photos as $photo) {
-    // Vérifie l'ID de la photo actuelle n'est pas égal à l'ID de la photo recommandée
-    if (get_the_ID() !== $photo->ID) {
-        echo '<div class="related-photo">';
-        echo '<a href="' . esc_url(get_permalink($photo)) . '">';
-        echo get_the_post_thumbnail($photo->ID, array( 564, 495)); // moyenne largeur
-        echo "</a>";
-        echo "</div>";
-
-        $count++;
-
-        // Si atteint le nombre maximum de photos à afficher (2), sortir de la boucle
-        if ($count === 2) {
-            break;
-        }}
-    }
+                    foreach ($related_photos as $photo) {
+                        // Vérifie si l'ID de la photo actuelle n'est pas égal à l'ID de la photo recommandée
+                        if (get_the_ID() !== $photo->ID) {
+                            // Transmet la variable $photo au modèle inclus
+                            set_query_var('related_photo', $photo);
+                    
+                            get_template_part('template-parts/photo_block');
+                    
+                            $count++;
+                    
+                            // Si  afficher (2), sortir de la boucle
+                            if ($count === 2) {
+                                break;
+                            }
+                        }
+                    }
+                    
+                    
 }
 
                 ?>
