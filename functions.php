@@ -2,7 +2,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.6.0' );
+	define( '_S_VERSION', '1.6.1' );
 }
 
 function theme_enqueue_styles() {
@@ -16,7 +16,10 @@ wp_enqueue_style('poppins-font', 'https://fonts.googleapis.com/css2?family=Poppi
     wp_enqueue_style('main-style', get_template_directory_uri() . '/style.css', array(), '1.0', 'all');
     // Enqueue navigation script
     wp_enqueue_script('navigation-script', get_stylesheet_directory_uri() . '/js/navigation.js', array(), null, true);
-    wp_enqueue_script('global-script', get_stylesheet_directory_uri() . '/js/scripts.js', array(), null, true);
+    // si c'est une page photo
+    if (is_singular('photos')) {
+        wp_enqueue_script('global-script', get_stylesheet_directory_uri() . '/js/scripts.js', array(), null, true);
+    }
     // Enqueue jQuery
     wp_enqueue_script( 'jquery' );
 }
