@@ -86,3 +86,19 @@
         @include btn-styles();
     }
 }
+
+/* -------------------------------------------------------------------------- */
+/*                              Selecteur de trie                             */
+/* -------------------------------------------------------------------------- */
+
+.selector-container {
+    display: flex;
+    justify-content: space-around;
+    // TODO: A changer :
+    padding: 50px 0;
+
+    &__group {
+        display: flex;
+        gap: 36px;
+    }
+}

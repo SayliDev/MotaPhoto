@@ -809,4 +809,17 @@ footer a:hover::before {
   color: #fff;
 }
 
+/* -------------------------------------------------------------------------- */
+/*                              Selecteur de trie                             */
+/* -------------------------------------------------------------------------- */
+.selector-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px 0;
+}
+.selector-container__group {
+  display: flex;
+  gap: 36px;
+}
+
 /*# sourceMappingURL=style.css.map */
