@@ -2,7 +2,7 @@
 
 if (!defined('_S_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('_S_VERSION', '1.6.2');
+    define('_S_VERSION', '1.6.3');
 }
 
 function theme_enqueue_styles()
@@ -109,6 +109,123 @@ $argsDecroissant = array(
     'order' => 'ASC', // par ordre croissant
 );
 
+//* Pour les type Argentique et Numérique
+
+$argsTypeArgentique = array(
+    'meta_query' => array(
+        array(
+            'key' => 'type',
+            'value' => 'Argentique',
+            // 'compare' => '=',
+        ),
+    ),
+    'posts_per_page' => 8,
+    'post_type' => 'photos',
+    'post_status' => 'publish',
+);
+
+$argsTypeNumerique = array(
+    'meta_query' => array(
+        array(
+            'key' => 'type',
+            'value' => 'Numérique',
+            // 'compare' => '=',
+        ),
+    ),
+    'posts_per_page' => 8,
+    'post_type' => 'photos',
+    'post_status' => 'publish',
+);
+
+//* Pour les categorie
+// categorie "réception"
+
+$argsReception = array(
+    'posts_per_page' => 8,
+    'post_type' => 'photos',
+    'post_status' => 'publish',
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'categorie',
+            'field' => 'slug',
+            'terms' => 'reception',
+        ),
+    ),
+);
+
+// categorie "television"
+
+$argsTelevision = array(
+    'posts_per_page' => 8,
+    'post_type' => 'photos',
+    'post_status' => 'publish',
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'categorie',
+            'field' => 'slug',
+            'terms' => 'television',
+        ),
+    ),
+);
+
+// categorie "concert"
+
+$argsConcert = array(
+    'posts_per_page' => 8,
+    'post_type' => 'photos',
+    'post_status' => 'publish',
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'categorie',
+            'field' => 'slug',
+            'terms' => 'concert',
+        ),
+    ),
+);
+
+// categorie "mariage"
+
+$argsMariage = array(
+    'posts_per_page' => 8,
+    'post_type' => 'photos',
+    'post_status' => 'publish',
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'categorie',
+            'field' => 'slug',
+            'terms' => 'mariage',
+        ),
+    ),
+);
+
+// // ! Arguments de filtre pour les photos numériques par ordre décroissant
+// $argsNumeriqueDecroissant = array(
+//     'meta_query' => array(
+//         array(
+//             'order' => 'ASC',
+//             'key' => 'type',
+//             'value' => 'Numérique',
+//             'posts_per_page' => 8,
+//             'post_type' => 'photos',
+//             'post_status' => 'publish',
+//         ),
+//     ),
+// );
+
+// // ! Arguments de filtre pour les photos numériques par ordre croissant
+// $argsNumeriqueCroissant = array(
+//     'meta_query' => array(
+//         array(
+//             'order' => 'DESC',
+//             'key' => 'type',
+//             'value' => 'Numérique',
+//             'posts_per_page' => 8,
+//             'post_type' => 'photos',
+//             'post_status' => 'publish',
+//         ),
+//     ),
+// );
+
 // Hook pour enregistrer et charger les scripts et styles
 function enqueue_my_scripts()
 {
@@ -116,13 +233,21 @@ function enqueue_my_scripts()
     wp_enqueue_script('navigation-script', get_stylesheet_directory_uri() . '/js/navigation.js', array(), null, true);
 
     // Défini les données localisées pour la navigation
-    global $argsCroissant, $argsDecroissant;
+    global $argsCroissant, $argsDecroissant, $argsTypeArgentique, $argsTypeNumerique, $argsReception, $argsTelevision, $argsConcert, $argsMariage;
     $localized_data = array(
         'argsCroissant' => $argsCroissant,
         'argsDecroissant' => $argsDecroissant,
+        'argsTypeArgentique' => $argsTypeArgentique,
+        'argsTypeNumerique' => $argsTypeNumerique,
+        'argsReception' => $argsReception,
+        'argsTelevision' => $argsTelevision,
+        'argsConcert' => $argsConcert,
+        'argsMariage' => $argsMariage,
+        // 'argsNumeriqueCroissant' => $argsNumeriqueCroissant,
+        // 'argsNumeriqueDecroissant' => $argsNumeriqueDecroissant,
     );
 
-    // TODO: changer pour le nom du script (load images)
+    // todo: changer pour le nom du script (load images.js)
     // Passage des données localisées au script (ajax))
     wp_localize_script('navigation-script', 'localized_data', $localized_data);
 }
@@ -130,45 +255,45 @@ add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
 
 /* -------------------------------------------------------------------------- */
 /*                            Diagramme de séquence                           */
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 
-                  +--------------------------+
-                  |   Frontend (Navigateur)  |
-                  +--------------------------+
-                            |
-                            | Requêtes AJAX
-                            |
-                  +--------------------------+
-                  |           load-images.js  |   
-                  +--------------------------+
-                            |
-                            | Envoie des données AJAX à l'URL admin-ajax.php
-                            |
-                  +--------------------------+
-                  |        admin-ajax.php     |
-                  +--------------------------+
-                            |
-                            | Traite les requêtes AJAX et appelle les fonctions correspondantes
-                            |
-                  +--------------------------+
-                  |         function.php      |
-                  +--------------------------+
-                            |
-                            | Enregistre les scripts et définit les données localisées
-                            | Appelle les fonctions de traitement AJAX
-                            |
-                  +--------------------------+
-                  |       load_more_images   |
-                  +--------------------------+
-                            |
-                            | Récupère les paramètres de la requête AJAX
-                            | Effectue la requête WP_Query avec les paramètres de filtrage
-                            | Affiche les résultats en utilisant le modèle photo_block.php
-                            |
-                  +--------------------------+
-                  |       photo-block.php    |
-                  +--------------------------+
-                            |
-                            | Affiche chaque image avec les paramètres spécifiés
-                            |
-*/
++--------------------------+
+|   Frontend (Navigateur)  |
++--------------------------+
+|
+| Requêtes AJAX
+|
++--------------------------+
+|           load-images.js  |
++--------------------------+
+|
+| Envoie des données AJAX à l'URL admin-ajax.php
+|
++--------------------------+
+|        admin-ajax.php     |
++--------------------------+
+|
+| Traite les requêtes AJAX et appelle les fonctions correspondantes
+|
++--------------------------+
+|         function.php      |
++--------------------------+
+|
+| Enregistre les scripts et définit les données localisées
+| Appelle les fonctions de traitement AJAX
+|
++--------------------------+
+|       load_more_images   |
++--------------------------+
+|
+| Récupère les paramètres de la requête AJAX
+| Effectue la requête WP_Query avec les paramètres de filtrage
+| Affiche les résultats en utilisant le modèle photo_block.php
+|
++--------------------------+
+|       photo-block.php    |
++--------------------------+
+|
+| Affiche chaque image avec les paramètres spécifiés
+|
+ */
